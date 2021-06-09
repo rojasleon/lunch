@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kitchen-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kitchen
+  template:
+    metadata:
+      labels:
+        app: kitchen
+    spec:
+      containers:
+        - name: kitchen
+          image: rojasleon/kitchen-dev
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://kitchen-mongo-srv:27017/kitchen'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: lunch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kitchen-srv
+spec:
+  selector:
+    app: kitchen
+  ports:
+    - name: kitchen
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: k-s
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s-dev/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rojasleon/kitchen-dev
+      context: kitchen
+      docker:
+        dockerfile: Dockerfile.dev
+    - image: rojasleon/storage-dev
+      context: storage
+      docker:
+        dockerfile: Dockerfile.dev
+    - image: rojasleon/client-dev
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
