@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: storage
-          image: rojasleon/storage-dev
+          image: rojasleon/storage
           env:
             - name: MONGO_URI
               value: 'mongodb://storage-mongo-srv:27017/storage'

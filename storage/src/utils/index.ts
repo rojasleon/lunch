@@ -1,3 +1,4 @@
+// By the default we gotta have 5 pieces of each ingredient
 export const defaultIngredients = [
   { name: 'tomato', quantity: 5 },
   { name: 'lemon', quantity: 5 },

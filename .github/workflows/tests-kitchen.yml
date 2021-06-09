@@ -1,0 +1,16 @@
+name: tests-kitchen
+
+on:
+  push:
+  pull_request:
+    paths:
+      - 'kitchen/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: run tests
+      run: |
+        cd kitchen && npm install && npm run test:ci

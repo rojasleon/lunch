@@ -19,10 +19,12 @@ export class OrderCompletedListener extends Listener<OrderCompletedEvent> {
       throw new Error('Order did not found');
     }
 
+    // Mark the order as completed
     order.set({ status: OrderStatus.Completed });
 
     await order.save();
 
+    // Ack the message
     msg.ack();
   }
 }

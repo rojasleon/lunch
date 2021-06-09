@@ -22,6 +22,8 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
           throw new Error('Ingredient did not found!');
         }
 
+        // If we have more ingredients than the needed ones
+        // just update the current quantity
         if (ingredient.quantity >= quantity) {
           ingredient.quantity -= quantity;
 
@@ -46,15 +48,19 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
           ingredient.quantity += currentIngredients - quantity;
 
+          // Update the previous quantity of ingredients and save
+          // the purchase  history
           await Promise.all([ingredient.save(), purchase.save()]);
         }
       }
     );
 
+    // Publish an event to tell the kitchen the order is ready
     new OrderCompletedPublisher(natsWrapper.client).publish({
       id: data._id
     });
 
+    // Ack the message
     msg.ack();
   }
 }

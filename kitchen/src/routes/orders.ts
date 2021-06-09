@@ -44,11 +44,13 @@ router.get('/api/kitchen/orders', async (req, res) => {
     {
       $facet: {
         orders: [
+          // Match orders with `status` with the provided one ['pending', 'completed']
           {
             $match: {
               status: { $eq: status }
             }
           },
+          // Populate recipe
           {
             $lookup: {
               from: 'recipes',
@@ -57,10 +59,13 @@ router.get('/api/kitchen/orders', async (req, res) => {
               as: 'recipe'
             }
           },
+          // Give us just some docs with the limit and skip option and
+          // deconstruct the array recipe and output a document for each elements
           { $limit: Number(limit) },
           { $skip: skip },
           { $unwind: '$recipe' }
         ],
+        // Count total of documents within the collection
         extra: [{ $group: { _id: null, totalDocuments: { $sum: 1 } } }]
       }
     }

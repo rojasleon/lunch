@@ -9,6 +9,7 @@ router.get('/api/kitchen/recipes', async (req, res) => {
   res.status(200).send(recipes);
 });
 
+// No needed it at all
 router.get('/api/kitchen/recipe', async (req, res) => {
   // This aggregation will retieve out a random recipe from the db
   const recipe = await Recipe.aggregate([{ $sample: { size: 1 } }]);

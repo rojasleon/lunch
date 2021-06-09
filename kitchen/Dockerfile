@@ -1,8 +1,8 @@
 FROM node:alpine
 
 WORKDIR /app
-COPY package*.json /app/
-COPY tsconfig.json /app/
+COPY package*.json ./
+COPY tsconfig.json ./
 COPY src /app/src/
 
 RUN npm install

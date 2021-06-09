@@ -1,10 +1,3 @@
-1. Manager press a button to order a dish
-2. In the kitchen there're 6 recipies
-   All ingredients have to be used in at least ONE recipe
-
-3. Cook has to pick up from the 6 recipies to prepare a dish
-4.
-
 // restart deployment
 k rollout restart deployment storage-depl
 

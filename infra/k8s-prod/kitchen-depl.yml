@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kitchen
-          image: rojasleon/kitchen-dev
+          image: rojasleon/kitchen
           env:
             - name: MONGO_URI
               value: 'mongodb://kitchen-mongo-srv:27017/kitchen'

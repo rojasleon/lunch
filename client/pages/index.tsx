@@ -8,6 +8,8 @@ import { useTypedSelector } from '../hooks/use-typed-selector';
 const Home = () => {
   const { createOrder, fetchOrders } = useActions();
   const [fireEvent, setFireEvent] = useState(false);
+  const [isMassive, setIsMassive] = useState(false);
+  const [stop, setStop] = useState(false);
   const [page, setPage] = useState(1);
   const {
     orders: {
@@ -23,9 +25,19 @@ const Home = () => {
     }
   } = useTypedSelector((state) => state.kitchen);
 
-  const handleClick = () => {
-    createOrder(500);
+  useEffect(() => {
+    setFireEvent(false);
+  }, [createdOrder]);
+
+  const handleAnOrder = () => {
     setFireEvent(true);
+    createOrder(1);
+  };
+
+  const handleMassiveOrders = () => {
+    setFireEvent(true);
+    setStop(true);
+    createOrder(1250);
   };
 
   useEffect(() => {
@@ -34,7 +46,7 @@ const Home = () => {
     if (fireEvent) {
       intervalId = setInterval(() => {
         fetchOrders({ page, status: OrderStatus.Pending });
-      }, 3000);
+      }, 1500);
     }
 
     return () => {
@@ -47,15 +59,38 @@ const Home = () => {
 
   return (
     <div>
-      <Button onClick={handleClick} color="green">
-        Prepare Free Lunch
-      </Button>
+      {isMassive ? (
+        <>
+          <Button disabled={stop} onClick={handleMassiveOrders} color="red">
+            Prepare Massive Lunches! (1250)
+          </Button>
+          <Header
+            as="h5"
+            color="green"
+            onClick={() => {
+              setIsMassive(false);
+              setStop(false);
+            }}
+          >
+            Change to light mode
+          </Header>
+        </>
+      ) : (
+        <>
+          <Button onClick={handleAnOrder} color="green">
+            Prepare Free Lunch
+          </Button>
+          <Header as="h5" color="red" onClick={() => setIsMassive(true)}>
+            Change to massive mode
+          </Header>
+        </>
+      )}
       {loadingOrders && <Spinner />}
       {loadingCreatedOrder && (
         <Header as="h4">Your orders are being prepared...</Header>
       )}
       {orders.length === 0 && <Header as="h3">No orders to prepare</Header>}
-      {createdOrder && <p>Orders Completed!</p>}
+      {createdOrder && <Header as="h3">Orders Completed!</Header>}
       {orders.map((order) => (
         <Message
           header={order.recipe.name}
@@ -63,11 +98,9 @@ const Home = () => {
         ></Message>
       ))}
       {!lastPage && orders.length > 0 && (
-        <div>
-          <Button color="blue" onClick={() => setPage((prev) => prev + 1)}>
-            Load more
-          </Button>
-        </div>
+        <Button fluid color="blue" onClick={() => setPage((prev) => prev + 1)}>
+          Load more
+        </Button>
       )}
     </div>
   );
