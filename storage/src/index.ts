@@ -5,8 +5,6 @@ import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { fillUpDatabase } from './migrations';
 
 const main = async () => {
-  console.log('Starting up storage service...');
-
   if (!process.env.MONGO_URI) {
     throw new Error('MONGO_URI must be defined');
   }
@@ -52,7 +50,7 @@ const main = async () => {
   }
 
   app.listen(3000, () => {
-    console.log('Listening on port 3000 from the storage service');
+    console.log('Listening on port 3000');
   });
 };
 
