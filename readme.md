@@ -2,7 +2,9 @@
 
 ### [rojasleon.tech](https://rojasleon.tech/)
 
-**IMPORTANT!** Right now the app does not have the https certificate, so if you see the https error connection, just press: `thisisunsafe` and you'll be able to see the content
+### IMPORTANT!
+
+Right now the app does not have the https certificate, so if you see the https error connection, just write: `thisisunsafe` and you'll be able to see the content
 
 Why the name of `rojasleon.tech` as domain?
 It's my personal website, I shot it down for a while to point it to the Load Balacer on Digital Ocean.
