@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'infra/k8s-prod'
+      - 'infra/**'
 
 jobs:
   build:
