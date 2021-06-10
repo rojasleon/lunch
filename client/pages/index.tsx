@@ -25,13 +25,13 @@ const Home = () => {
 
   const handleMassiveOrders = () => {
     setStop(true);
-    createOrder(500);
+    createOrder(200);
   };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       fetchOrders({ page, status: OrderStatus.Pending });
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearInterval(intervalId);
@@ -45,7 +45,7 @@ const Home = () => {
       {isMassive ? (
         <>
           <Button disabled={stop} onClick={handleMassiveOrders} color="red">
-            Prepare Massive Lunches! (500)
+            Prepare Massive Lunches! (200)
           </Button>
           <Header
             as="h5"

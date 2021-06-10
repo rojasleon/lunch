@@ -6,7 +6,7 @@ describe('Orders', () => {
   it('Responds with a 201 status code when given valid credentials', async () => {
     await request(app)
       .post('/api/kitchen/orders')
-      .send({ quantity: 1 })
+      .send({ quantity: 5 })
       .expect(201);
   });
 

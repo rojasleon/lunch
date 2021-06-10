@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: www.rojasleon.tech
+    - host: lunch.dev
       http:
         paths:
           - path: /api/kitchen/
@@ -36,7 +36,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    service.beta.kubernetes.io/do-loadbalancer-hostname: 'rojasleon.tech'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.rojasleon.tech'
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
     app.kubernetes.io/name: ingress-nginx

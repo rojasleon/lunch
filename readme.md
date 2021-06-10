@@ -1,11 +1,8 @@
-// restart deployment
-k rollout restart deployment storage-depl
+# Lunch App
 
-delete all containers including its volumes
-docker rm -vf $(docker ps -a -q)
+I tried to put this app on a real kubernetes cluster, but it didn't work... I'm sad. I spent many many hours trying doing that.
+Maybe it was because the documentation that I looked at, it was out of date.
+Anyway.
 
-docker rmi -f $(docker images -a -q)
-docker rmi -f $(docker images -a -q)
-
-Delete all pods and services in namespace my-ns,
-kubectl -n [namespace] delete pod,svc --all
+Here's a video of the app using my local kubernetes cluster with the production docker images on it.
+[Youtube Video](https//loc)
