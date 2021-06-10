@@ -25,7 +25,7 @@ const Home = () => {
 
   const handleMassiveOrders = () => {
     setStop(true);
-    createOrder(200);
+    createOrder(100);
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Home = () => {
       {isMassive ? (
         <>
           <Button disabled={stop} onClick={handleMassiveOrders} color="red">
-            Prepare Massive Lunches! (200)
+            Prepare Massive Lunches! (100)
           </Button>
           <Header
             as="h5"
