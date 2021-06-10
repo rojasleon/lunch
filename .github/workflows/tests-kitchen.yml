@@ -1,7 +1,6 @@
 name: tests-kitchen
 
 on:
-  push:
   pull_request:
     paths:
       - 'kitchen/**'
