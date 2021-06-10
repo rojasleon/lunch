@@ -26,7 +26,7 @@ router.post('/api/kitchen/orders', async (req, res) => {
       _id: order._id
     });
 
-    return res.send(order);
+    return res.status(201).send(order);
   }
 });
 
