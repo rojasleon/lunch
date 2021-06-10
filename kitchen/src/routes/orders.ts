@@ -8,22 +8,26 @@ import { natsWrapper } from '../nats-wrapper';
 const router = express.Router();
 
 // Not ideal, but this makes easy the use of massive orders
-router.post('/api/kitchen/orders', async (req, res) => {
-  const { quantity = 1 } = req.body;
-  for (let i = 0; i < quantity; i++) {
-    const [recipe] = await Recipe.aggregate([{ $sample: { size: 1 } }]);
 
+router.post('/api/kitchen/orders', async (req, res) => {
+  const [recipe] = await Recipe.aggregate([{ $sample: { size: 1 } }]);
+  const { quantity = 1 } = req.body;
+
+  for (let i = 0; i < quantity; i++) {
     const order = Order.build({ status: OrderStatus.Pending, recipe });
 
     await order.save();
 
+    // Publish an event to the storage service to tell them
+    // that we need some ingredients
     new OrderCreatedPublisher(natsWrapper.client).publish({
       ingredients: recipe.ingredients,
       name: recipe.name,
       _id: order._id
     });
+
+    return res.send(order);
   }
-  res.status(201).send({ message: 'All orders completed!' });
 });
 
 router.get('/api/kitchen/orders', async (req, res) => {

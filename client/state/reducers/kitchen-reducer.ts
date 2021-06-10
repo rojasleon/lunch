@@ -17,7 +17,7 @@ interface KitchenState {
   recipes: CommonState<Recipe[]>;
   selectedRecipe: CommonState<Recipe | null>;
   orders: CommonOrders;
-  createdOrder: CommonState<string>;
+  createdOrder: CommonState<Order>;
 }
 
 const initialState: KitchenState = {
@@ -28,7 +28,7 @@ const initialState: KitchenState = {
   },
   selectedRecipe: { data: null, loading: false, error: '' },
   orders: { data: [], lastPage: false, loading: false, error: '', total: 0 },
-  createdOrder: { data: '', loading: false, error: '' }
+  createdOrder: { data: null, loading: false, error: '' }
 };
 
 const kitchenReducer = (

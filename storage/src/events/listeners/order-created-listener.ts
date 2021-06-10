@@ -50,7 +50,8 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
           // Update the previous quantity of ingredients and save
           // the purchase  history
-          await Promise.all([ingredient.save(), purchase.save()]);
+          await ingredient.save();
+          await purchase.save();
         }
       }
     );

@@ -82,7 +82,9 @@ export const createOrder = (quantity: number) => {
     dispatch({ type: ActionType.CREATE_ORDER_START });
 
     try {
-      const { data } = await axios.post('/api/kitchen/orders', { quantity });
+      const { data } = await axios.post<Order>('/api/kitchen/orders', {
+        quantity
+      });
 
       dispatch({ type: ActionType.CREATE_ORDER_COMPLETE, payload: data });
     } catch (err) {

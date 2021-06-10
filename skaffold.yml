@@ -5,20 +5,27 @@ metadata:
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s-prod/*
-# build:
-#   local:
-#     push: false
-#   artifacts:
-#     - image: rojasleon/kitchen
-#       context: kitchen
-#       docker:
-#         dockerfile: Dockerfile
-#     - image: rojasleon/storage
-#       context: storage
-#       docker:
-#         dockerfile: Dockerfile
-#     - image: rojasleon/client
-#       context: client
-#       docker:
-#         dockerfile: Dockerfile
+      # Just temporarily
+      # - ./infra/k8s-prod/*
+      - ./infra/k8s-dev/ingress-srv
+      - ./infra/k8s-dev/kitchen-depl
+      - ./infra/k8s-dev/kitchen-mongo-depl
+      - ./infra/k8s-dev/storage-depl
+      - ./infra/k8s-dev/storage-mongo-depl
+      - ./infra/k8s-dev/nats-depl
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rojasleon/kitchen-dev
+      context: kitchen
+      docker:
+        dockerfile: Dockerfile.dev
+    - image: rojasleon/storage-dev
+      context: storage
+      docker:
+        dockerfile: Dockerfile.dev
+    # - image: rojasleon/client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile

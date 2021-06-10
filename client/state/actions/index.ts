@@ -85,7 +85,7 @@ interface CreateOrderStartAction {
 
 interface CreateOrderCompleteAction {
   type: ActionType.CREATE_ORDER_COMPLETE;
-  payload: string;
+  payload: Order;
 }
 
 interface CreateOrderErrorAction {
