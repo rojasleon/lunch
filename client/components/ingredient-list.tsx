@@ -21,7 +21,7 @@ const IngredientList = () => {
   return (
     <div>
       {loading && <Spinner />}
-      <Header as="h1">Ingredients List</Header>
+      <Header as="h1">Current ingredients available in the kitchen</Header>
       <Card.Group centered>
         {data.map((ingredient) => (
           <IngredientItem key={ingredient._id} {...ingredient} />

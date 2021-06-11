@@ -2,7 +2,7 @@ import { Document, Schema, Model, model } from 'mongoose';
 import { OrderStatus, Recipe } from '@rojasleon-lunch/common';
 
 interface OrderAttrs {
-  recipe: Recipe;
+  recipe: string;
   status: OrderStatus;
 }
 

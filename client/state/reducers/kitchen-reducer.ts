@@ -16,7 +16,8 @@ interface CommonOrders extends CommonState<Order[]> {
 interface KitchenState {
   recipes: CommonState<Recipe[]>;
   selectedRecipe: CommonState<Recipe | null>;
-  orders: CommonOrders;
+  completedOrders: CommonOrders;
+  pendingOrders: CommonOrders;
   createdOrder: CommonState<Order>;
 }
 
@@ -27,7 +28,20 @@ const initialState: KitchenState = {
     error: ''
   },
   selectedRecipe: { data: null, loading: false, error: '' },
-  orders: { data: [], lastPage: false, loading: false, error: '', total: 0 },
+  completedOrders: {
+    data: [],
+    lastPage: false,
+    loading: false,
+    error: '',
+    total: 0
+  },
+  pendingOrders: {
+    data: [],
+    lastPage: false,
+    loading: false,
+    error: '',
+    total: 0
+  },
   createdOrder: { data: null, loading: false, error: '' }
 };
 
@@ -63,10 +77,10 @@ const kitchenReducer = (
         ...state,
         selectedRecipe: { data: null, error: action.payload, loading: false }
       };
-    case ActionType.FETCH_ORDERS_START:
+    case ActionType.FETCH_COMPLETED_ORDERS_START:
       return {
         ...state,
-        orders: {
+        completedOrders: {
           data: [],
           error: '',
           loading: true,
@@ -74,10 +88,10 @@ const kitchenReducer = (
           total: 0
         }
       };
-    case ActionType.FETCH_ORDERS_COMPLETE:
+    case ActionType.FETCH_COMPLETED_ORDERS_COMPLETE:
       return {
         ...state,
-        orders: {
+        completedOrders: {
           data: action.payload.orders,
           error: '',
           loading: false,
@@ -85,10 +99,43 @@ const kitchenReducer = (
           total: action.payload.total
         }
       };
-    case ActionType.FETCH_ORDERS_ERROR:
+    case ActionType.FETCH_COMPLETED_ORDERS_ERROR:
       return {
         ...state,
-        orders: {
+        completedOrders: {
+          data: null,
+          error: action.payload,
+          loading: false,
+          lastPage: false,
+          total: 0
+        }
+      };
+    case ActionType.FETCH_PENDING_ORDERS_START:
+      return {
+        ...state,
+        pendingOrders: {
+          data: [],
+          error: '',
+          loading: true,
+          lastPage: false,
+          total: 0
+        }
+      };
+    case ActionType.FETCH_PENDING_ORDERS_COMPLETE:
+      return {
+        ...state,
+        pendingOrders: {
+          data: action.payload.orders,
+          error: '',
+          loading: false,
+          lastPage: action.payload.lastPage,
+          total: action.payload.total
+        }
+      };
+    case ActionType.FETCH_PENDING_ORDERS_ERROR:
+      return {
+        ...state,
+        pendingOrders: {
           data: null,
           error: action.payload,
           loading: false,

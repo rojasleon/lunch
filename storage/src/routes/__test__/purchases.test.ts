@@ -22,8 +22,10 @@ describe('Purchases', () => {
     expect(response.body.total).toEqual(0);
   });
 
-  it('Responds with an empty array if no purchase was made', async () => {
-    await setup();
+  it('Responds with details about the purchases with valid inputs', async () => {
+    for (let i = 0; i < 10; i++) {
+      await setup();
+    }
 
     const response = await request(app)
       .get('/api/storage/purchases?page=1&limit=20')
@@ -31,6 +33,6 @@ describe('Purchases', () => {
       .expect(200);
 
     expect(response.body.purchases[0].name).toEqual('tomato');
-    expect(response.body.total).toEqual(1);
+    expect(response.body.total).toEqual(10);
   });
 });

@@ -61,12 +61,12 @@ interface FetchPurchasesErrorAction {
   payload: string;
 }
 
-interface FetchOrdersStartAction {
-  type: ActionType.FETCH_ORDERS_START;
+interface FetchCompletedOrdersStartAction {
+  type: ActionType.FETCH_COMPLETED_ORDERS_START;
 }
 
-interface FetchOrdersCompleteAction {
-  type: ActionType.FETCH_ORDERS_COMPLETE;
+interface FetchCompletedOrdersCompleteAction {
+  type: ActionType.FETCH_COMPLETED_ORDERS_COMPLETE;
   payload: {
     orders: Order[];
     lastPage: boolean;
@@ -74,8 +74,26 @@ interface FetchOrdersCompleteAction {
   };
 }
 
-interface FetchOrdersErrorAction {
-  type: ActionType.FETCH_ORDERS_ERROR;
+interface FetchCompletedOrdersErrorAction {
+  type: ActionType.FETCH_COMPLETED_ORDERS_ERROR;
+  payload: string;
+}
+
+interface FetchPendingOrdersStartAction {
+  type: ActionType.FETCH_PENDING_ORDERS_START;
+}
+
+interface FetchPendingOrdersCompleteAction {
+  type: ActionType.FETCH_PENDING_ORDERS_COMPLETE;
+  payload: {
+    orders: Order[];
+    lastPage: boolean;
+    total: number;
+  };
+}
+
+interface FetchPendingOrdersErrorAction {
+  type: ActionType.FETCH_PENDING_ORDERS_ERROR;
   payload: string;
 }
 
@@ -106,9 +124,12 @@ export type Action =
   | FetchPurchasesStartAction
   | FetchPurchasesCompleteAction
   | FetchPurchasesErrorAction
-  | FetchOrdersStartAction
-  | FetchOrdersCompleteAction
-  | FetchOrdersErrorAction
+  | FetchCompletedOrdersStartAction
+  | FetchCompletedOrdersCompleteAction
+  | FetchCompletedOrdersErrorAction
+  | FetchPendingOrdersStartAction
+  | FetchPendingOrdersCompleteAction
+  | FetchPendingOrdersErrorAction
   | CreateOrderStartAction
   | CreateOrderCompleteAction
   | CreateOrderErrorAction;

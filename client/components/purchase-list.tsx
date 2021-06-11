@@ -24,6 +24,7 @@ const PurchaseList = () => {
       {loading && <Spinner />}
       <Header as="h1">Purchases List</Header>
       <Header as="h3">Total items: {total}</Header>
+      <Header as="h3">There are {data.length} purchases on this page</Header>
       <Card.Group centered>
         {data.map((purchase) => (
           <PurchaseItem key={purchase._id} {...purchase} />

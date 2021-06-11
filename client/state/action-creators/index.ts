@@ -40,27 +40,26 @@ export const selectRecipe = () => {
   };
 };
 
-export const fetchOrders = ({
+export const fetchCompletedOrders = ({
   page = 1,
-  limit = 20,
-  status = OrderStatus.Completed
+  limit = 20
 }: {
   page?: number;
   limit?: number;
   status?: OrderStatus;
 }) => {
   return async (dispatch: Dispatch<Action>) => {
-    dispatch({ type: ActionType.FETCH_ORDERS_START });
+    dispatch({ type: ActionType.FETCH_COMPLETED_ORDERS_START });
 
     try {
       const {
         data: { orders, total }
       } = await axios.get<{ orders: Order[]; total: number }>(
-        `/api/kitchen/orders?page=${page}&limit=${limit}&status=${status}`
+        `/api/kitchen/orders/completed?page=${page}&limit=${limit}`
       );
 
       dispatch({
-        type: ActionType.FETCH_ORDERS_COMPLETE,
+        type: ActionType.FETCH_COMPLETED_ORDERS_COMPLETE,
         payload: {
           orders,
           // make sure you handle the case in where you just got the last orders
@@ -70,7 +69,43 @@ export const fetchOrders = ({
       });
     } catch (err) {
       dispatch({
-        type: ActionType.FETCH_ORDERS_ERROR,
+        type: ActionType.FETCH_COMPLETED_ORDERS_ERROR,
+        payload: err.response.data
+      });
+    }
+  };
+};
+
+export const fetchPendingOrders = ({
+  page = 1,
+  limit = 20
+}: {
+  page?: number;
+  limit?: number;
+  status?: OrderStatus;
+}) => {
+  return async (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.FETCH_PENDING_ORDERS_START });
+
+    try {
+      const {
+        data: { orders, total }
+      } = await axios.get<{ orders: Order[]; total: number }>(
+        `/api/kitchen/orders/pending?page=${page}&limit=${limit}`
+      );
+
+      dispatch({
+        type: ActionType.FETCH_PENDING_ORDERS_COMPLETE,
+        payload: {
+          orders,
+          // make sure you handle the case in where you just got the last orders
+          lastPage: orders.length !== limit,
+          total
+        }
+      });
+    } catch (err) {
+      dispatch({
+        type: ActionType.FETCH_PENDING_ORDERS_ERROR,
         payload: err.response.data
       });
     }

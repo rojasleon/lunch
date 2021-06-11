@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { OrderStatus } from '@rojasleon-lunch/common';
 import { Button, Header, Message } from 'semantic-ui-react';
-import Spinner from '../components/spinner';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 
 const Home = () => {
-  const { createOrder, fetchOrders } = useActions();
+  const { createOrder, fetchPendingOrders } = useActions();
   const [isMassive, setIsMassive] = useState(false);
   const [stop, setStop] = useState(false);
   const [page, setPage] = useState(1);
   const {
-    orders: {
-      data: orders,
-      loading: loadingOrders,
-      error: ordersError,
-      lastPage
-    }
+    pendingOrders: { data, loading, error, lastPage }
   } = useTypedSelector((state) => state.kitchen);
 
   const handleAnOrder = () => {
@@ -29,8 +23,9 @@ const Home = () => {
   };
 
   useEffect(() => {
+    // Not ideal
     const intervalId = setInterval(() => {
-      fetchOrders({ page, status: OrderStatus.Pending });
+      fetchPendingOrders({ page });
     }, 1000);
 
     return () => {
@@ -38,7 +33,7 @@ const Home = () => {
     };
   }, []);
 
-  if (ordersError) return <p>{ordersError}</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -68,9 +63,8 @@ const Home = () => {
           </Header>
         </>
       )}
-      {loadingOrders && <Spinner />}
-      {orders.length === 0 && <Header as="h3">No orders to prepare</Header>}
-      {orders.map((order) => (
+      {data.length === 0 && <Header as="h3">No orders to prepare</Header>}
+      {data.map((order) => (
         <>
           {order.status === OrderStatus.Pending && (
             <Message
@@ -80,7 +74,7 @@ const Home = () => {
           )}
         </>
       ))}
-      {!lastPage && orders.length > 0 && (
+      {!lastPage && data.length > 0 && (
         <Button fluid color="blue" onClick={() => setPage((prev) => prev + 1)}>
           Load more
         </Button>

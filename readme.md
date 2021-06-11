@@ -19,4 +19,6 @@ Few notes:
 - Do not pay attention at the `looking` of the website, is not the best I know, It was a quick decision: _Should I write my own css styles? No... Should I use a css framework to do it? Yes, and I pick up semantic ui_. Also yeah, it was a quick desicion.
 - Another microservice can be perfectly added, something like a `worker service` to catch some queries, responses, etc.
 - HTTPS support could be added
+- In the ingredients logic would be quite ok if I added a status of `pending/completed` to see what ingredients are available.
+- In the purchases page would be also nice to add a `pending/completed` status to show some fast feedback
 - Many many more improvments can be added to this project.

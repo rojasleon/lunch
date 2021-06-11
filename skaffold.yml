@@ -5,21 +5,20 @@ metadata:
 deploy:
   kubectl:
     manifests:
-      # Just temporarily run the prod images
-      - ./infra/k8s-prod/*
-# build:
-#   local:
-#     push: false
-#   artifacts:
-#     - image: rojasleon/kitchen-dev
-#       context: kitchen
-#       docker:
-#         dockerfile: Dockerfile.dev
-#     - image: rojasleon/storage-dev
-#       context: storage
-#       docker:
-        # dockerfile: Dockerfile.dev
-    # - image: rojasleon/client
-    #   context: client
-    #   docker:
-    #     dockerfile: Dockerfile
+      - ./infra/k8s-dev/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rojasleon/kitchen-dev
+      context: kitchen
+      docker:
+        dockerfile: Dockerfile.dev
+    - image: rojasleon/storage-dev
+      context: storage
+      docker:
+        dockerfile: Dockerfile.dev
+    - image: rojasleon/client-dev
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
