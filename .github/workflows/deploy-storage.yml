@@ -21,5 +21,5 @@ jobs:
       - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save lunch
+      - run: doctl kubernetes cluster kubeconfig save 34fc28e5-36cb-4a00-bcaa-bec9b4b48c34
       - run: kubectl rollout restart deployment storage-depl
