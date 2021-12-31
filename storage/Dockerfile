@@ -5,7 +5,7 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY src /app/src/
 
-RUN npm install
+RUN npm install --force
 RUN npm run build
 COPY . .
 
