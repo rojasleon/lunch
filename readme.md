@@ -11,6 +11,8 @@ It's my personal website, I shot it down for a while to point it to the Load Bal
 When the review is down I'll roll out the domain name back to my personal site.
 Yeah, you right, I did not want to spend some money 😅.
 
+The app is hosted in a Kubernetes Cluster at Digital Ocean.
+
 ### Microservice application based on events.
 
 Few notes:
