@@ -1,11 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 const Header = () => {
   return (
     <div className="ui menu">
       <Link href="/">
-        <a className="header item">Lunches App</a>
+        <a className="header item">Hello Alegra</a>
       </Link>
       <div className="right menu">
         <Link href="/recipes">

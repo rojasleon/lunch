@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - rojasleon.tech
+      - rojasleon.xyz
       secretName: echo-tls
   rules:
-    - host: rojasleon.tech
+    - host: rojasleon.xyz
       http:
         paths:
           - path: /api/kitchen/?(.*)
@@ -33,7 +33,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    service.beta.kubernetes.io/do-loadbalancer-hostname: 'rojasleon.tech'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'rojasleon.xyz'
   labels:
     helm.sh/chart: ingress-nginx-2.11.1
     app.kubernetes.io/name: ingress-nginx

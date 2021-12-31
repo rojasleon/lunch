@@ -1,14 +1,12 @@
 # Lunch App
 
-Note: The following site does not contain the project, it's my personal site.
-If you guys want to see it again I can shut down my site and put online the app.
 ### [rojasleon.xyz](https://rojasleon.xyz/)
 
 ### IMPORTANT!
 
-Right now the app does not have the https certificate, so if you see the https error connection, just write: `thisisunsafe` and you'll be able to see the content
+Right now the app does not have a https certificate, so if you see the https error connection, just write: `thisisunsafe` and you'll be able to see the content
 
-Why the name of `rojasleon.tech` as domain?
+Why the name of `rojasleon.xyz` as domain?
 It's my personal website, I shot it down for a while to point it to the Load Balacer on Digital Ocean.
 When the review is down I'll roll out the domain name back to my personal site.
 Yeah, you right, I did not want to spend some money 😅.
