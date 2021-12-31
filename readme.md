@@ -1,6 +1,8 @@
 # Lunch App
 
-### [rojasleon.tech](https://rojasleon.tech/)
+Note: The following site does not contain the project, it's my personal site.
+If you guys want to see it again I can shut down my site and put online the app.
+### [rojasleon.tech](https://rojasleon.xyz/)
 
 ### IMPORTANT!
 
